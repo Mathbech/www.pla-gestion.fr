@@ -23,14 +23,14 @@
   </head>
   <body>
     <div class="container-scroller">
-    <?php
-        include_once('partials/_navbar.php');
+      <?php
+        include_once('./includes/_navbar.php');
       ?>
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <!-- Inclure sidebar avec php -->
         <?php 
-        include_once('partials/_sidebar.php');
+        include_once('./includes/_sidebar.php');
         ?>
         
         <div class="col-md-6 grid-margin stretch-card">
@@ -86,7 +86,7 @@
         <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
           <?php
-            include_once('./partials/_footer.php');
+            include_once('./includes/_footer.php');
           ?>
           <!-- partial -->
         <!-- main-panel ends -->

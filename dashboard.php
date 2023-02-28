@@ -1,3 +1,18 @@
+<?php
+    include_once('./includes/connect.php');
+
+    try{
+
+        $result = $mysqli->query("SELECT * FROM filament ");
+        
+
+    }catch (mysqli_sql_exception $exception) {
+
+        $mysqli->rollback();
+    
+        throw $exception;
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -5,7 +20,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Dashboard</title>
-    plugins:css
+    <!-- plugins:css -->
     <link rel="stylesheet" href="./assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="./assets/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="./assets/vendors/css/vendor.bundle.base.css">
@@ -24,26 +39,26 @@
   <body>
     <div class="container-scroller">
       <!-- inclure la nav bar php -->
-      <?php
-        include_once('./partials/_navbar.php');;
-      ?>
-      <div class="container-fluid page-body-wrapper">
-        <!-- Inclure sidebar avec php -->
-        <?php 
-          include_once('./partials/_sidebar.php');
+        <?php
+            include_once('./includes/_navbar.php');;
         ?>
-        <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+          <!-- Inclure sidebar avec php -->
+          <?php 
+            include_once('./includes/_sidebar.php');
+          ?>
+          <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
+            <div class="content-wrapper">
             <div class="d-xl-flex justify-content-between align-items-start">
               <h2 class="text-dark font-weight-bold mb-2"> Dashboard </h2>
-              <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
-                <!-- <div class="btn-group bg-white p-3" role="group" aria-label="Basic example">
+              <!-- <div class="d-sm-flex justify-content-xl-between align-items-center mb-2">
+                <div class="btn-group bg-white p-3" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-link text-light py-0 border-right">7 Days</button>
                   <button type="button" class="btn btn-link text-dark py-0 border-right">1 Month</button>
                   <button type="button" class="btn btn-link text-light py-0">3 Month</button>
-                </div> -->
-                <!-- <div class="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
+                </div>
+                <div class="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
                   <button class="btn bg-white dropdown-toggle p-3 d-flex align-items-center" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-calendar mr-1"></i>24 Mar 2019 - 24 Mar 2019 </button>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1">
                     <h6 class="dropdown-header">Settings</h6>
@@ -53,8 +68,8 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Separated link</a>
                   </div>
-                </div> -->
-              </div>
+                </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -195,7 +210,7 @@
           </div>
           <!-- content-wrapper ends -->
           <?php
-            include_once('./partials/_footer.php');
+            include_once('./includes/_footer.php');
           ?>
         </div>
         <!-- main-panel ends -->
