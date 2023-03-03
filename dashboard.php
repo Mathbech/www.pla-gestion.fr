@@ -1,18 +1,3 @@
-<?php
-include_once('./includes/connect.php');
-
-try {
-
-    $result = $mysqli->query("SELECT * FROM filament ");
-
-
-} catch (mysqli_sql_exception $exception) {
-
-    $mysqli->rollback();
-
-    throw $exception;
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -44,13 +29,13 @@ try {
         <?php
 
         include_once('./includes/_navbar.php');
-        nav('Mathieu');
+        nav('Bébech');
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side('Mathieu');
+            side('Bébech');
             ?>
             <!-- partial -->
             <div class="main-panel">
@@ -64,7 +49,11 @@ try {
                                 <div class="tab-pane fade show active" id="business-1" role="tabpanel"
                                     aria-labelledby="business-tab">
                                     <div class="row">
-                                        <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+                                        <?php 
+                                            include_once('./includes/bobine.php');
+                                            card();
+                                        ?>
+                                        <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body text-center">
                                                     <h5 class="mb-2 text-dark font-weight-normal">Temps total
@@ -80,8 +69,8 @@ try {
                                                     </h3>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
+                                        </div> -->
+                                        <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body text-center">
                                                     <h5 class="mb-2 text-dark font-weight-normal">Dépenses totales en
@@ -93,11 +82,11 @@ try {
                                                             class="mdi mdi-account-circle icon-md absolute-center text-dark"></i>
                                                     </div>
                                                     <p class="mt-4 mb-0">Total bobines acheté</p>
-                                                    <h3 class="mb-0 font-weight-bold mt-2 text-dark">25 Bobines</h3>
+                                                    <h3 class="mb-0 font-weight-bold mt-2 text-dark"><?php echo $donnees['nombre']; ?> Bobines</h3>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card">
+                                        </div> -->
+                                        <!-- <div class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body text-center">
                                                     <h5 class="mb-2 text-dark font-weight-normal">Poid total acheté</h5>
@@ -110,7 +99,7 @@ try {
                                                     <h3 class="mb-0 font-weight-bold mt-2 text-dark">3.500Kg</h3>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
                                             <div class="card">
                                             <div class="card-body text-center">

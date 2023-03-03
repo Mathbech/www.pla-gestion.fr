@@ -11,6 +11,6 @@
     $mysqli = new mysqli($host, $username, $password, $dbname);
     mysqli_set_charset($mysqli, 'utf8mb4');
     // affichage d'un message de réussite si connecté
-    printf("Success... %s\n", mysqli_get_host_info($mysqli));
+    //printf("Success... %s\n", mysqli_get_host_info($mysqli));
     //fin de la connection à la bdd
 ?>

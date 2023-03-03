@@ -25,12 +25,14 @@
     <div class="container-scroller">
     <?php
         include_once('./includes/_navbar.php');
+        nav('Mathieu');
       ?>
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <!-- Inclure sidebar avec php -->
         <?php 
         include_once('./includes/_sidebar.php');
+        side('Mathieu');
         ?>
         
         <div class="col-md-6 grid-margin stretch-card">
@@ -75,6 +77,7 @@
           <!-- partial:../../partials/_footer.html -->
           <?php
             include_once('./includes/_footer.php');
+            footer();
           ?>
           <!-- partial -->
         <!-- main-panel ends -->
