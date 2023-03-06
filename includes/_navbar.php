@@ -32,8 +32,9 @@ function nav($username)
                     <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm"
                         aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                         <div class="p-3 text-center bg-primary">
-                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/images/faces/face28.png"
-                                alt="">
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/images/faces/face28.png" alt="Photo profil">
+                            <h2><?php echo $username; ?></h2>
+
                         </div>
                         <!-- Menu déroulant des options de l'utilisateur -->
                         <div class="p-2">

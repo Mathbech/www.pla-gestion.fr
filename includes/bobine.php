@@ -25,9 +25,6 @@ function card()
                 </div>
             </div>
             <?php
-            // echo "ID: " . $row['ID']. "\n";
-            // echo "couleur: " . $row['couleur']. "\n";
-            // $ID = $row['ID'];
         }
 
 
