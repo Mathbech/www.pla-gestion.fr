@@ -104,16 +104,10 @@ function side($username)
 				</div>
 			</li>
 			<!-- Fin profil de l'utilisateur -->
-			<!-- <li class="nav-item sidebar-user-actions">
-				<div class="sidebar-user-menu">
-				  <a href="#" class="nav-link"><i class="mdi mdi-speedometer menu-icon"></i>
-					<span class="menu-title">Take Tour</span></a>
-				</div>
-			  </li> -->
 			  <!-- Déconnexion button -->
 			<li class="nav-item sidebar-user-actions">
 				<div class="sidebar-user-menu">
-					<a href="./index.php" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+					<a href="./includes/logout.php" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
 						<span class="menu-title">Déconnexion</span></a>
 				</div>
 			</li>

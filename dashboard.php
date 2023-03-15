@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+
+// Vérification de la session de l'utilisateur
+if (!isset($_SESSION['connect']) || $_SESSION['connect'] !== true) {
+    //L'utilisateur n'est pas connecté, redirection vers la page de connexion
+    header('Location: ./index.php');
+    exit();
+}
+
+// Page protégée par authentification
+$timezone = date_default_timezone_get();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -27,15 +41,16 @@
     <div class="container-scroller">
         <!-- inclure la nav bar php -->
         <?php
-
+        $username = "utilisateur";
+        
         include_once('./includes/_navbar.php');
-        nav('Bébech');
+        nav($username);
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side('Bébech');
+            side($username);
             ?>
             <!-- partial -->
             <div class="main-panel">
@@ -53,64 +68,6 @@
                                             include_once('./includes/bobine.php');
                                             card();
                                         ?>
-                                        <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <h5 class="mb-2 text-dark font-weight-normal">Temps total
-                                                        d'impression</h5>
-                                                    <h2 class="mb-4 text-dark font-weight-bold">932.00 Heures</h2>
-                                                    <div
-                                                        class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent">
-                                                        <i
-                                                            class="mdi mdi-lightbulb icon-md absolute-center text-dark"></i>
-                                                    </div>
-                                                    <p class="mt-4 mb-0">Terminé</p>
-                                                    <h3 class="mb-0 font-weight-bold mt-2 text-dark"> 500 Impressions
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <h5 class="mb-2 text-dark font-weight-normal">Dépenses totales en
-                                                        bobines</h5>
-                                                    <h2 class="mb-4 text-dark font-weight-bold">800€</h2>
-                                                    <div
-                                                        class="dashboard-progress dashboard-progress-2 d-flex align-items-center justify-content-center item-parent">
-                                                        <i
-                                                            class="mdi mdi-account-circle icon-md absolute-center text-dark"></i>
-                                                    </div>
-                                                    <p class="mt-4 mb-0">Total bobines acheté</p>
-                                                    <h3 class="mb-0 font-weight-bold mt-2 text-dark"><?php echo $donnees['nombre']; ?> Bobines</h3>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <h5 class="mb-2 text-dark font-weight-normal">Poid total acheté</h5>
-                                                    <h2 class="mb-4 text-dark font-weight-bold">25Kg</h2>
-                                                    <div
-                                                        class="dashboard-progress dashboard-progress-3 d-flex align-items-center justify-content-center item-parent">
-                                                        <i class="mdi mdi-eye icon-md absolute-center text-dark"></i>
-                                                    </div>
-                                                    <p class="mt-4 mb-0">Poid total imprimé</p>
-                                                    <h3 class="mb-0 font-weight-bold mt-2 text-dark">3.500Kg</h3>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-                                            <div class="card">
-                                            <div class="card-body text-center">
-                                                <h5 class="mb-2 text-dark font-weight-normal">Followers</h5>
-                                                <h2 class="mb-4 text-dark font-weight-bold">4250k</h2>
-                                                <div class="dashboard-progress dashboard-progress-4 d-flex align-items-center justify-content-center item-parent"><i class="mdi mdi-cube icon-md absolute-center text-dark"></i></div>
-                                                <p class="mt-4 mb-0">Decreased since yesterday</p>
-                                                <h3 class="mb-0 font-weight-bold mt-2 text-dark">25%</h3>
-                                            </div>
-                                            </div>
-                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-12 grid-margin">
@@ -158,8 +115,7 @@
                                                                     </div>
                                                                     <div class="d-lg-flex">
                                                                         <p class="mr-2 mb-0">Timezone:</p>
-                                                                        <p class="text-dark font-weight-bold mb-0">UTC
-                                                                            +2:00 Paris </p>
+                                                                        <p class="text-dark font-weight-bold mb-0"> <?php echo $timezone ?></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="graph-custom-legend clearfix"

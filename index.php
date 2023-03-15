@@ -2,6 +2,9 @@
 <html lang="fr">
 
 <head>
+    <?php
+    session_start();
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,18 +34,18 @@
                             <div class="brand-logo">
                                 <img src="./assets/images/logo-dark.svg">
                             </div>
-                            <h4>Bonjour, on est parti!</h4>
+                            <h4>Bonjour, on est parti !</h4>
                             <h6 class="font-weight-light">Connecte toi pour continuer.</h6>
-                            <form class="pt-3">
+                            <form class="pt-3" method="post" action="./includes/loggin.php">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" id="username" placeholder="Username">
+                                    <input type="text" name="loggin" class="form-control form-control-lg" id="username" placeholder="Nom d'utilisateur">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" id="password" placeholder="Password">
+                                    <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Mot de passe">
                                 </div>
                                 <div class="mt-3">
-                                    <!-- <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Se connecter"> -->
-                                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="dashboard.php">SIGN IN</a>
+                                    <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Se connecter">
+                                    <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="dashboard.php">SIGN IN</a> -->
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">

@@ -4,13 +4,17 @@
     $password = '';
     $host = 'localhost';
     $dbname = 'gestion_pla';
-    //fin des variables de connection
+    // //fin des variables de connection
 
-    //connexion a la bdd
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    $mysqli = new mysqli($host, $username, $password, $dbname);
-    mysqli_set_charset($mysqli, 'utf8mb4');
-    // affichage d'un message de réussite si connecté
-    //printf("Success... %s\n", mysqli_get_host_info($mysqli));
-    //fin de la connection à la bdd
+    try{
+        //Connexion a la base de donnée.
+        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // echo"Connecté a la base de donnée";
+
+    }catch(PDOException $e){
+        //afficher une erreur de connection a la base de donnée.
+        echo "Erreur de connexion à la base de donnée: " . $e->getMessage();
+    }
+
 ?>

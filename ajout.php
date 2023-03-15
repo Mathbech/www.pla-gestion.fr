@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+
+// Vérification de la session de l'utilisateur
+if (!isset($_SESSION['connect']) || $_SESSION['connect'] !== true) {
+    //L'utilisateur n'est pas connecté, redirection vers la page de connexion
+    header('Location: ./index.php');
+    exit();
+}
+
+// Page protégée par authentification
+$timezone = date_default_timezone_get();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,15 +40,16 @@
 <body>
     <div class="container-scroller">
         <?php
+            $username = 'utilisateur';
             include_once('./includes/_navbar.php');
-            nav('Mathieu');
+            nav($username);
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side('Mathieu');
+            side($username);
             ?>
 
             <div class="col-md-6 grid-margin stretch-card">
@@ -42,7 +57,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Ajout de stock</h4>
                         <p class="card-description"> Veuillez remplir le formulaire pour ajouter du stock </p>
-                        <form class="forms-sample">
+                        <form class="forms-sample" method="post" action="./includes/insert.php">
                             <div class="form-group row">
                                 <label for="type_de_filament" class="col-sm-3 col-form-label">Type de filament</label>
                                 <div class="col-sm-9">
@@ -58,28 +73,28 @@
                             <div class="form-group row">
                                 <label for="nombre_bobine" class="col-sm-3 col-form-label">Nombre de bobine</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="qte" id="nombre_bobine" placeholder="Nombre de bobine">
+                                    <input type="number" name="nb_bobine" class="qte" id="nombre_bobine" placeholder="Nombre de bobine">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="poids" class="col-sm-3 col-form-label">Poids de la bobine</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="poids" id="poids" placeholder="Poids">
+                                    <input type="text" name="poids" class="poids" id="poids" placeholder="Poids">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="couleur_filament" class="col-sm-3 col-form-label">couleur</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="couleur" id="couleur_filament" placeholder="couleur">
+                                    <input type="text" name="color" class="couleur" id="couleur_filament" placeholder="couleur">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="prix" class="col-sm-3 col-form-label">prix payé</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="prix" placeholder="prix payé">
+                                    <input type="text" name="price" class="form-control" id="prix" placeholder="prix payé">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button type="submit" class="btn btn-primary mr-2">ajouter</button>
                             <button class="btn btn-light">Cancel</button>
                         </form>
                     </div>
