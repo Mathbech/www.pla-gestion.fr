@@ -1,15 +1,9 @@
 <?php
 session_start();
 
+require_once('./includes/log.php');
+isloggedin();
 
-// Vérification de la session de l'utilisateur
-if (!isset($_SESSION['connect']) || $_SESSION['connect'] !== true) {
-    //L'utilisateur n'est pas connecté, redirection vers la page de connexion
-    header('Location: ./index.php');
-    exit();
-}
-
-// Page protégée par authentification
 $timezone = date_default_timezone_get();
 ?>
 <!DOCTYPE html>
