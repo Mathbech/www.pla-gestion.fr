@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$username = $_SESSION['username'];
+$id = $_SESSION['id'];
 
 require_once('./includes/log.php');
 isloggedin();
@@ -34,7 +35,6 @@ isloggedin();
 <body>
     <div class="container-scroller">
         <?php
-            $username = 'utilisateur';
             include_once('./includes/_navbar.php');
             nav($username);
         ?>

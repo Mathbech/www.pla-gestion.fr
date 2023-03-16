@@ -10,12 +10,12 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 	var_dump($username);
 	var_dump($password);
     var_dump($email);
-	$param=null;
 
-	$q = $conn->prepare("INSERT INTO users (loggin, mail, psw) VALUES (:username, :mail, :psw)");
+	$q = $conn->prepare("INSERT INTO users (loggin, mail, psw, active) VALUES (:username, :mail, :psw, :active)");
 	$q->bindValue(':username', $username);
     $q->bindValue(':mail', $email);
 	$q->bindValue(':psw', $password);
+	$q->bindValue('active', true);
 	$result = $q->execute();
 
 

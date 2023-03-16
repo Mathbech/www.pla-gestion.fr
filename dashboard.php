@@ -1,5 +1,7 @@
 <?php
 session_start();
+$username = $_SESSION['username'];
+$id = $_SESSION['id'];
 
 require_once('./includes/log.php');
 isloggedin();
@@ -35,10 +37,11 @@ $timezone = date_default_timezone_get();
     <div class="container-scroller">
         <!-- inclure la nav bar php -->
         <?php
-        $username = "utilisateur";
+        //$username = $_SESSION['username'];
         
         include_once('./includes/_navbar.php');
         nav($username);
+        echo "id = ",$id;
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
@@ -58,9 +61,9 @@ $timezone = date_default_timezone_get();
                                 <div class="tab-pane fade show active" id="business-1" role="tabpanel"
                                     aria-labelledby="business-tab">
                                     <div class="row">
-                                        <?php 
-                                            include_once('./includes/bobine.php');
-                                            card();
+                                        <?php
+                                        include_once('./includes/bobine.php');
+                                        card($id);
                                         ?>
                                     </div>
                                     <div class="row">
@@ -127,14 +130,17 @@ $timezone = date_default_timezone_get();
                         </div>
                     </div>
                 </div>
-                <!-- content-wrapper ends -->
-                <?php
-                include_once('./includes/_footer.php');
-                ?>
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- content-wrapper ends -->
+        <?php
+        include_once('./includes/_footer.php');
+        footer();
+        ?>
+    </div>
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
