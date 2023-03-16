@@ -4,7 +4,7 @@ function card()
 {
     include_once('includes/connect.php');
     try {
-        $stm = $conn->query("SELECT Couleur, nombre, id_users FROM filament WHERE id_users = :id_users");
+        $stm = $conn->query("SELECT Couleur, nombre, id_users FROM filament");
 
         //foreach ($result as $row) {
         while($row = $stm->fetch()){?>
