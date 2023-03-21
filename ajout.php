@@ -35,11 +35,11 @@ isloggedin();
 <body>
     <div class="container-scroller">
         <?php
+            // Inclure la navbar avec php
             include_once('./includes/_navbar.php');
             nav($username);
         ?>
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
@@ -89,7 +89,7 @@ isloggedin();
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">ajouter</button>
-                            <button class="btn btn-light">Cancel</button>
+                            <!-- <button class="btn btn-light" a href="./ajout.php">Cancel</button> -->
                         </form>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 <?php
-session_start();
-$username = $_SESSION['username'];
-$id = $_SESSION['id'];
+    session_start();
+    $username = $_SESSION['username'];
+    $id = $_SESSION['id'];
 
-require_once('./includes/log.php');
-isloggedin();
+    require_once('./includes/log.php');
+    isloggedin();
 
-$timezone = date_default_timezone_get();
+    $timezone = date_default_timezone_get();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,12 +36,9 @@ $timezone = date_default_timezone_get();
 <body>
     <div class="container-scroller">
         <!-- inclure la nav bar php -->
-        <?php
-        //$username = $_SESSION['username'];
-        
+        <?php        
         include_once('./includes/_navbar.php');
         nav($username);
-        echo "id = ",$id;
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
@@ -58,8 +55,7 @@ $timezone = date_default_timezone_get();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="tab-content tab-transparent-content">
-                                <div class="tab-pane fade show active" id="business-1" role="tabpanel"
-                                    aria-labelledby="business-tab">
+                                <div class="tab-pane fade show active" id="business-1" role="tabpanel" aria-labelledby="business-tab">
                                     <div class="row">
                                         <?php
                                         include_once('./includes/bobine.php');
@@ -72,15 +68,13 @@ $timezone = date_default_timezone_get();
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-sm-12">
-                                                            <div
-                                                                class="d-flex justify-content-between align-items-center mb-4">
+                                                            <div class="d-flex justify-content-between align-items-center mb-4">
                                                                 <h4 class="card-title mb-0">Activitée récente</h4>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3 col-sm-4 grid-margin  grid-margin-lg-0">
                                                             <div class="wrapper pb-5 border-bottom">
-                                                                <div
-                                                                    class="text-wrapper d-flex align-items-center justify-content-between mb-2">
+                                                                <div class="text-wrapper d-flex align-items-center justify-content-between mb-2">
                                                                     <p class="mb-0 text-dark">Profit Total</p>
                                                                     <span class="text-success"><i
                                                                             class="mdi mdi-equal"></i>0.00%</span>
@@ -105,9 +99,7 @@ $timezone = date_default_timezone_get();
                                                                     class="d-xl-flex justify-content-between align-items-center mb-2">
                                                                     <div
                                                                         class="d-lg-flex align-items-center mb-lg-2 mb-xl-0">
-                                                                        <h3
-                                                                            class="text-dark font-weight-bold mr-2 mb-0">
-                                                                            Impressions vendues</h3>
+                                                                        <h3 class="text-dark font-weight-bold mr-2 mb-0"> Impressions vendues</h3>
                                                                         <h5 class="mb-0">( growth 0% )</h5>
                                                                     </div>
                                                                     <div class="d-lg-flex">

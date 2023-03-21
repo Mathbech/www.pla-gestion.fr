@@ -18,8 +18,7 @@ function nav($username)
             <ul class="navbar-nav navbar-nav-right">
                 <!-- Navigation sur le profil -->
                 <li class="nav-item nav-profile dropdown">
-                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                         <div class="nav-profile-img">
                             <img src="assets/images/faces/face28.png" alt="image">
                         </div>
@@ -39,31 +38,27 @@ function nav($username)
                         <!-- Menu déroulant des options de l'utilisateur -->
                         <div class="p-2">
                             <h5 class="dropdown-header text-uppercase pl-2 text-dark">Options d'utilisateur</h5>
-                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                            <!-- <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
                                 <span>Boite de réception</span>
                                 <span class="p-0">
                                     <span class="badge badge-primary">3</span>
                                     <i class="mdi mdi-email-open-outline ml-1"></i>
                                 </span>
-                            </a>
-                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                            </a> -->
+                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="./settings.php">
                                 <span>Profil</span>
                                 <span class="p-0">
-                                    <span class="badge badge-success">1</span>
+                                    <!-- <span class="badge badge-success">1</span> -->
                                     <i class="mdi mdi-account-outline ml-1"></i>
                                 </span>
                             </a>
                             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-                                href="javascript:void(0)">
+                                href="./settings.php">
                                 <span>Paramètres</span>
                                 <i class="mdi mdi-settings"></i>
                             </a>
                             <div role="separator" class="dropdown-divider"></div>
                             <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
-                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
-                                <span>Vérouiller compte</span>
-                                <i class="mdi mdi-lock ml-1"></i>
-                            </a>
                             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="./includes/logout.php">
                                 <span>Déconnexion</span>
                                 <i class="mdi mdi-logout ml-1"></i>
