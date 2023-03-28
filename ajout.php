@@ -67,7 +67,7 @@ isloggedin();
                             <div class="form-group row">
                                 <label for="nombre_bobine" class="col-sm-3 col-form-label">Nombre de bobine</label>
                                 <div class="col-sm-9">
-                                    <input type="number" name="nb_bobine" class="qte" id="nombre_bobine" placeholder="Nombre de bobine">
+                                    <input type="text" name="nb_bobine" class="qte" id="nombre_bobine" placeholder="Nombre de bobine">
                                 </div>
                             </div>
                             <div class="form-group row">

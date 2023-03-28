@@ -31,12 +31,12 @@
                 </div>
                 <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
                   <h2>Accès refusé!</h2>
-                  <h3 class="font-weight-light">La ressource que vous essayer d'afficher est protégé !</h3>
+                  <h3 class="font-weight-light">La ressource que vous essayez d'afficher est protégé !</h3>
                 </div>
               </div>
               <div class="row mt-5">
                 <div class="col-12 text-center mt-xl-2">
-                  <a class="text-white font-weight-medium" href="./index.php">Back to home</a>
+                  <a class="text-white font-weight-medium" href="./index.php">Connectez-vous !</a>
                 </div>
               </div>
               <div class="row mt-5">

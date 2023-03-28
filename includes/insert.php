@@ -18,7 +18,7 @@ $q->bindValue('nb_bobine', $nb_bobine);
 $q->bindValue('poids', $poids);
 $q->bindValue('color', $color);
 $q->bindValue('price', $price);
-$q->bindValue('id', $idart);
+$q->bindValue('id', $id);
     
 $result = $q->execute();
 

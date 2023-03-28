@@ -22,6 +22,18 @@
 </head>
 
 <body>
+    <?php 
+    session_start();
+    if(isset($_SESSION['err'])){
+        $bug = $_SESSION['err'];
+        unset($_SESSION['err']);
+    }
+    if(isset($_SESSION['valid'])){
+        $val = $_SESSION['valid'];
+        unset($_SESSION['valid']);
+    }
+    if(isset($_POST)){
+        ?>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
@@ -34,7 +46,7 @@
                             <h4>Tu es nouveau?</h4>
                             <h6 class="font-weight-light">inscrit toi, c'est gratuit et rapide. En quelques étapes c'est
                                 fait</h6>
-                            <form class="pt-3" method="post" action="./includes/singin.php">
+                            <form class="pt-3" method="post" action="./register.php">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="username" placeholder="Nom d'utilisateur">
                                 </div>
@@ -48,6 +60,9 @@
                                     <input type="password" class="form-control form-control-lg" name="cpassword" id="exampleInputPassword2" placeholder=" Confirmer le Mot de passe">
                                 </div>
                                 <div class="mb-4">
+                                    <p class="text-danger"><?php if (isset($bug)) echo ($bug); ?></p>
+                                    <p class="text-success"><?php if (isset($val)) echo ($val); ?></p>
+
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
                                             <input type="checkbox" class="form-check-input"> J'accepte les termes et les conditions </label>
@@ -68,6 +83,50 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    <?php
+    }
+    $err = "";
+    $valid = "";
+    require('./includes/connect.php');
+
+    if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['cpassword'])) {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $pass = $_POST['password'];
+        $cpassword = $_POST['cpassword'];
+        if ($pass == $cpassword) {
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+            if(preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ " , $email)){
+
+            var_dump($username);
+            var_dump($password);
+            var_dump($email);
+
+            $q = $conn->prepare("INSERT INTO users (loggin, mail, psw, active) VALUES (:username, :mail, :psw, :active)");
+            $q->bindValue(':username', $username);
+            $q->bindValue(':mail', $email);
+            $q->bindValue(':psw', $password);
+            $q->bindValue('active', true);
+            $result = $q->execute();
+
+
+            if ($result) {
+                $valid = 'inscription réussie';
+                header('Location: ./index.php');
+            }
+        }else{
+            $err = 'L\'adresse mail n\'est pas valide';
+        }
+        }else{
+            $err = 'Les mots de passes ne correspondent pas!';
+        }
+    }
+
+    $_SESSION['err'] = $err;
+    $_SESSION['valid'] = $valid;
+
+    ?>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
