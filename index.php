@@ -25,6 +25,18 @@
 </head>
 
 <body>
+    <?php 
+    if(isset($_SESSION['err'])){
+        $bug = $_SESSION['err'];
+        unset($_SESSION['err']);
+    }
+    if(isset($_SESSION['valid'])){
+        $val = $_SESSION['valid'];
+        unset($_SESSION['valid']);
+    }
+
+    if(isset($_POST)){
+        ?>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
@@ -36,12 +48,16 @@
                             </div>
                             <h4>Bonjour, on est parti !</h4>
                             <h6 class="font-weight-light">Connecte toi pour continuer.</h6>
-                            <form class="pt-3" method="post" action="./includes/loggin.php">
+                            <form class="pt-3" method="post" action="./index.php">
                                 <div class="form-group">
                                     <input type="text" name="loggin" class="form-control form-control-lg" id="username" placeholder="Nom d'utilisateur">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Mot de passe">
+                                </div>
+                                <div class="form-group">
+                                <p class="text-danger"><?php if (isset($bug)) echo ($bug); ?></p>
+                                <p class="text-success"><?php if (isset($val)) echo ($val); ?></p>
                                 </div>
                                 <div class="mt-3">
                                     <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Se connecter">
@@ -65,6 +81,52 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+
+    <?php
+    }
+        require('./includes/connect.php');
+        if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
+            $username = $_POST['loggin'];
+            $password = $_POST['password'];
+
+            //var_dump($username);
+            //var_dump($password);
+            //Préparation requête pour récupérer les id de l'utilisateur
+            $q = $conn->prepare("SELECT id, psw, active FROM `users` WHERE `loggin` = :loggin");
+            //Préparation des valeurs
+            $q->bindValue('loggin', $username);
+            //exécution de la requête
+            $q->execute();
+            $result = $q->fetch(PDO::FETCH_ASSOC);
+
+            // var_dump($result['id']);
+
+            $err = "";
+            //Si résultat obtenu continuer
+            if ($result) {
+                $id = $result['id'];
+                $active = $result['active'];
+                $passwordhash = $result['psw'];
+                //Vérification du mot de passe
+                if (password_verify($password, $passwordhash)) {
+                    //vérification du compte (actif ou non)
+                    if ($active == true) {
+                        $_SESSION['username'] = $username;
+                        $_SESSION['id'] = $id;
+                        // echo "Connexion réussie ";
+                        header('location: ./dashboard.php');
+                    } else {
+                        $err = 'Votre compte à été désactivé';
+                    }
+                } else {
+                    $err = 'Identifiant invalides ou innexistant';
+                }
+            } else {
+                $err = 'Identifiant invalides ou innexistant';
+            }
+            $_SESSION['err'] = $err;
+        }
+    ?>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
