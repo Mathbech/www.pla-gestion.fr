@@ -1,10 +1,53 @@
+<?php
+session_start();
+require('./includes/connect.php');
+if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
+    $username = $_POST['loggin'];
+    $password = $_POST['password'];
+
+    //var_dump($username);
+    //var_dump($password);
+    //Préparation requête pour récupérer les id de l'utilisateur
+    $q = $conn->prepare("SELECT id, psw, active FROM `users` WHERE `loggin` = :loggin");
+    //Préparation des valeurs
+    $q->bindValue('loggin', $username);
+    //exécution de la requête
+    $q->execute();
+    $result = $q->fetch(PDO::FETCH_ASSOC);
+
+    // var_dump($result['id']);
+
+    $err = "";
+    //Si résultat obtenu continuer
+    if ($result) {
+        $id = $result['id'];
+        $active = $result['active'];
+        $passwordhash = $result['psw'];
+        //Vérification du mot de passe
+        if (password_verify($password, $passwordhash)) {
+            //vérification du compte (actif ou non)
+            if ($active == true) {
+                $_SESSION['username'] = $username;
+                $_SESSION['id'] = $id;
+                // echo "Connexion réussie ";
+                header('location: ./dashboard.php');
+            } else {
+                $err = 'Votre compte à été désactivé';
+            }
+        } else {
+            $err = 'Identifiant invalides ou innexistant';
+        }
+    } else {
+        $err = 'Identifiant invalides ou innexistant';
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <?php
-    session_start();
-    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,15 +69,6 @@
 
 <body>
     <?php 
-    if(isset($_SESSION['err'])){
-        $bug = $_SESSION['err'];
-        unset($_SESSION['err']);
-    }
-    if(isset($_SESSION['valid'])){
-        $val = $_SESSION['valid'];
-        unset($_SESSION['valid']);
-    }
-
     if(isset($_POST)){
         ?>
     <div class="container-scroller">
@@ -56,8 +90,8 @@
                                     <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Mot de passe">
                                 </div>
                                 <div class="form-group">
-                                <p class="text-danger"><?php if (isset($bug)) echo ($bug); ?></p>
-                                <p class="text-success"><?php if (isset($val)) echo ($val); ?></p>
+                                <p class="text-danger"><?php if (isset($err)) echo ($err); ?></p>
+                                <p class="text-success"><?php if (isset($valid)) echo ($valid); ?></p>
                                 </div>
                                 <div class="mt-3">
                                     <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="Se connecter">
@@ -84,48 +118,7 @@
 
     <?php
     }
-        require('./includes/connect.php');
-        if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
-            $username = $_POST['loggin'];
-            $password = $_POST['password'];
-
-            //var_dump($username);
-            //var_dump($password);
-            //Préparation requête pour récupérer les id de l'utilisateur
-            $q = $conn->prepare("SELECT id, psw, active FROM `users` WHERE `loggin` = :loggin");
-            //Préparation des valeurs
-            $q->bindValue('loggin', $username);
-            //exécution de la requête
-            $q->execute();
-            $result = $q->fetch(PDO::FETCH_ASSOC);
-
-            // var_dump($result['id']);
-
-            $err = "";
-            //Si résultat obtenu continuer
-            if ($result) {
-                $id = $result['id'];
-                $active = $result['active'];
-                $passwordhash = $result['psw'];
-                //Vérification du mot de passe
-                if (password_verify($password, $passwordhash)) {
-                    //vérification du compte (actif ou non)
-                    if ($active == true) {
-                        $_SESSION['username'] = $username;
-                        $_SESSION['id'] = $id;
-                        // echo "Connexion réussie ";
-                        header('location: ./dashboard.php');
-                    } else {
-                        $err = 'Votre compte à été désactivé';
-                    }
-                } else {
-                    $err = 'Identifiant invalides ou innexistant';
-                }
-            } else {
-                $err = 'Identifiant invalides ou innexistant';
-            }
-            $_SESSION['err'] = $err;
-        }
+        
     ?>
     <!-- container-scroller -->
     <!-- plugins:js -->
