@@ -1,7 +1,7 @@
 <?php
     //variables de connection
-    $username = 'root';
-    $password = '';
+    $username = 'web';
+    $password = 'adV]GmI3fE[rvOXZ';
     $host = 'localhost';
     $dbname = 'gestion_pla';
     // //fin des variables de connection

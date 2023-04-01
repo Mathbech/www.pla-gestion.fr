@@ -6,6 +6,30 @@ $id = $_SESSION['id'];
 require_once('./includes/log.php');
 isloggedin();
 
+
+if(!empty($_POST['type']) && !empty($_POST['nb_bobine']) && !empty($_POST['poids']) && !empty($_POST['color']) && !empty($_POST['price'])){
+    require('./includes/connect.php');
+    // Mise ne variable des données reçut en POST
+    $categorie = $_POST['type'];
+    $nb_bobine = $_POST['nb_bobine'];
+    $poids = $_POST['poids'];
+    $color = $_POST['color'];
+    $price = $_POST['price'];
+    //Fin de la mise en varriable
+
+
+    //Insérer une ligne dans la table de données
+    $q = $conn->prepare("INSERT INTO filament (categorie, nombre, couleur, poid, prix, id_users) VALUES (:cate, :nb_bobine, :color, :poids, :price, :id)");
+    $q->bindValue('cate', $categorie);
+    $q->bindValue('nb_bobine', $nb_bobine);
+    $q->bindValue('poids', $poids);
+    $q->bindValue('color', $color);
+    $q->bindValue('price', $price);
+    $q->bindValue('id', $id);
+        
+    $result = $q->execute();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,6 +57,9 @@ isloggedin();
 </head>
 
 <body>
+    <?php
+    if(isset($_POST)){
+        ?>
     <div class="container-scroller">
         <?php
             // Inclure la navbar avec php
@@ -51,11 +78,10 @@ isloggedin();
                     <div class="card-body">
                         <h4 class="card-title">Ajout de stock</h4>
                         <p class="card-description"> Veuillez remplir le formulaire pour ajouter du stock </p>
-                        <form class="forms-sample" method="post" action="./includes/insert.php">
+                        <form class="forms-sample" method="post" action="./ajout.php">
                             <div class="form-group row">
                                 <label for="type_de_filament" class="col-sm-3 col-form-label">Type de filament</label>
                                 <div class="col-sm-9">
-                                    <!-- <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username"> -->
                                     <select name="type" class="typeFilament" id="type_de_filament">
                                         <option value="">Sélectionnez le type de filament</option>
                                         <option value="PLA">PLA</option>
@@ -89,7 +115,6 @@ isloggedin();
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">ajouter</button>
-                            <!-- <button class="btn btn-light" a href="./ajout.php">Cancel</button> -->
                         </form>
                     </div>
                 </div>
@@ -106,6 +131,9 @@ isloggedin();
         <!-- main-panel ends -->
         <!-- page-body-wrapper ends -->
     </div>
+    <?php
+    }
+    ?>
 
 
     <!-- container-scroller -->

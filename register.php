@@ -41,7 +41,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['c
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <!-- Required meta tags -->
