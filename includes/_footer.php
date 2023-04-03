@@ -10,6 +10,7 @@ function footer()
                 <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
                         href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from
                     Bootstrapdash.com</span>
+                    <p><a href="./mentions_legales.pdf" target="_blank">Mentions légales</a></p>
             </div>
         </div>
     </footer>

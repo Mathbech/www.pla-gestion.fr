@@ -84,9 +84,10 @@ function side($username)
 					<div class="d-flex justify-content-between align-items-center">
 						<div>
 							<div class="d-flex align-items-center">
-								<!-- <div class="sidebar-profile-img">
-									<img src="assets/images/faces/face28.png" alt="image">
-								</div> -->
+								<div class="sidebar-profile-img">
+									<!-- <img src="assets/images/faces/face28.png" alt="image"> -->
+									<i class="bi bi-person-circle"></i>
+								</div>
 								<div class="sidebar-profile-text">
 									<p class="mb-1"><?php echo $username; ?></p>
 								</div>
@@ -96,13 +97,13 @@ function side($username)
 					</div>
 				</div>
 			</li>
-			<li class="nav-item sidebar-user-actions">
+			<!-- <li class="nav-item sidebar-user-actions">
 				<div class="sidebar-user-menu">
 					<a href="./settings.php" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
 						<span class="menu-title">Paramètres</span>
 					</a>
 				</div>
-			</li>
+			</li> -->
 			<!-- Fin profil de l'utilisateur -->
 			  <!-- Déconnexion button -->
 			<li class="nav-item sidebar-user-actions">

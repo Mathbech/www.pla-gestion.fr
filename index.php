@@ -114,6 +114,10 @@ if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
             <!-- content-wrapper ends -->
         </div>
         <!-- page-body-wrapper ends -->
+        <?php
+        include_once('./includes/_footer.php');
+        footer();
+        ?>
     </div>
 
     <?php
