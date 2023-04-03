@@ -84,9 +84,9 @@ function side($username)
 					<div class="d-flex justify-content-between align-items-center">
 						<div>
 							<div class="d-flex align-items-center">
-								<div class="sidebar-profile-img">
+								<!-- <div class="sidebar-profile-img">
 									<img src="assets/images/faces/face28.png" alt="image">
-								</div>
+								</div> -->
 								<div class="sidebar-profile-text">
 									<p class="mb-1"><?php echo $username; ?></p>
 								</div>

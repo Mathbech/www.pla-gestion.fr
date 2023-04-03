@@ -1,6 +1,7 @@
 <?php
 session_start();
 $username = $_SESSION['username'];
+$id = $_SESSION['id'];
 
 require_once('./includes/log.php');
 isloggedin();
@@ -33,73 +34,102 @@ isloggedin();
 </head>
 
 <body>
-    <?php 
-        if (isset($_POST)) {
-    ?>
-            <div class="container-scroller">
-                <?php
-                include_once('./includes/_navbar.php');
-                nav($username);
-                ?>
-                <div class="container-fluid page-body-wrapper">
-                    <!-- partial:partials/_sidebar.html -->
-                    <!-- Inclure sidebar avec php -->
-                    <?php
-                    include_once('./includes/_sidebar.php');
-                    side($username);
-                    ?>
+    <div class="container-scroller">
+        <?php
+        include_once('./includes/_navbar.php');
+        nav($username);
+        ?>
+        <div class="container-fluid page-body-wrapper">
+            <!-- Inclure sidebar avec php -->
+            <?php
+            include_once('./includes/_sidebar.php');
+            side($username);
 
-                    <div class="col-md-6 grid-margin stretch-card">
+            include_once('./includes/connect.php');
+            if (isset($_POST['delete'])) {
+                $delete_ids = $_POST['delete'];
+                foreach ($delete_ids as $delete_id) {
+                    $sql = "DELETE FROM filament WHERE id_users = $id AND id = :id";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(array(':id' => $delete_id));
+                }
+            }
+
+            // Récupération des données de la table "filament"
+            $sql = "SELECT * FROM filament WHERE id_users = $id";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            ?>
+            <div class="row">
+                <form method="post">
+                    <div class="col-lg-10 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">retrait de stock</h4>
-                                <p class="card-description"> Veuillez remplir le formulaire pour enlever le stock consommé</p>
-                                <form class="forms-sample">
-                                    <div class="form-group row">
-                                        <label for="type_de_filament" class="col-sm-3 col-form-label">Type de filament</label>
-                                        <div class="col-sm-9">
-                                            <!-- <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username"> -->
-                                            <select name="type" class="typeFilament" id="type_de_filament">
-                                                <option value="">Sélectionnez le type de filament</option>
-                                                <option value="PLA">PLA</option>
-                                                <option value="PETG">PETG</option>
-                                                <option value="ABS">ABS</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="poids" class="col-sm-3 col-form-label">Poids consommé</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="poids" id="poids" placeholder="Poids consommé">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="couleur_filament" class="col-sm-3 col-form-label">couleur</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="couleur" id="couleur_filament" placeholder="couleur">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                    <button class="btn btn-light">Cancel</button>
-                                </form>
+                                <h4 class="card-title">Retrait de stock</h4>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> # </th>
+                                            <th> Catégorie </th>
+                                            <th> Nombre </th>
+                                            <th> Couleur </th>
+                                            <th> Prix </th>
+                                            <th> Date de l'ajout </th>
+                                            <th> Select </th>
+                                        </tr>
+                                    </thead>
+                                    <?php
+                                    $i = 1;
+                                    // Affichage des données dans un tableau HTML
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        ?>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <?php echo ($i); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ($row['categorie']); ?>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <?php echo ($row['nombre']); ?>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <?php echo ($row['couleur']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ($row['prix'] . ' €'); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo ($row['date_ajout']); ?>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" name="delete[]"
+                                                        value="<?php echo $row['id']; ?>">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <?php
+                                        $i++;
+                                    }
+                                    ?>
+                                </table>
+                                <input type="submit" value="retirer" class="btn btn-primary">
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
-                <?php
-                include_once('./includes/_footer.php');
-                footer();
-                ?>
-                <!-- partial -->
-                <!-- main-panel ends -->
-                <!-- page-body-wrapper ends -->
+                </form>
             </div>
-    <?php
-        }
-    ?>
+        </div>
+        <!-- inclure footer -->
+        <?php
+        include_once('./includes/_footer.php');
+        footer();
+        ?>
+    </div>
+
 
 
     <!-- container-scroller -->

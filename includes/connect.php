@@ -2,7 +2,7 @@
     //variables de connection
     $username = 'web';
     $password = 'adV]GmI3fE[rvOXZ';
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $dbname = 'gestion_pla';
     // //fin des variables de connection
 

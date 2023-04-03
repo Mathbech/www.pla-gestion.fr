@@ -3,7 +3,8 @@ function card($id)
 {
     include_once('includes/connect.php');
     try {
-        $result = $conn->query("SELECT categorie, couleur, nombre, id_users FROM filament WHERE id_users = $id");
+        // $result = $conn->query("SELECT categorie, couleur, nombre, id_users FROM filament WHERE id_users = $id");
+        $result = $conn->query("SELECT categorie, couleur, id, SUM(nombre) AS total_nombre FROM filament WHERE id_users = $id GROUP BY categorie, couleur");
 
 
         // var_dump($q);
@@ -11,7 +12,7 @@ function card($id)
         foreach ($result as $row) {
             $type = $row['categorie'];
             $color = $row['couleur'];
-            $nb = $row['nombre'];
+            $nb = $row['total_nombre'];
             ?>
 
 
@@ -30,7 +31,7 @@ function card($id)
                         
                         <p class="mt-4 mb-0">Bobines en stock</p>
                         <h3 class="mb-0 font-weight-bold mt-2 text-dark">
-                            <?php echo $nb; ?> Bobine(s)
+                            <?php echo $nb; if($nb < 2){ echo (' Bobine');} else{ echo (' Bobines');} ?>
                         </h3>
                     </div>
                 </div>
