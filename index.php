@@ -72,6 +72,10 @@ if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
     if(isset($_POST)){
         ?>
     <div class="container-scroller">
+    <?php
+        include_once('./includes/_navbar.php');
+        navd('Non connecté');
+        ?>
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
                 <div class="row flex-grow">
@@ -98,13 +102,13 @@ if (!empty($_POST['loggin']) && !empty($_POST['password'])) {
                                     <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="dashboard.php">SIGN IN</a> -->
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <label class="form-check-label text-muted"><input type="checkbox" class="form-check-input"> Se souvenir de moi </label>
-                                    </div>
-                                    <a href="#" class="auth-link text-black">Mot de passe oublié?</a>
+                                    </div> -->
+                                    <!-- <a href="#" class="auth-link text-black">Mot de passe oublié?</a> -->
                                 </div>
-                                <div class="text-center mt-4 font-weight-light"> Tu n'as pas de compte? <a
-                                        href="register.php" class="text-primary">Créé le!</a>
+                                <div class="text-center mt-4 font-weight-light"> 
+                                    Tu n'as pas de compte? <a href="register.php" class="text-primary">Créé le!</a>
                                 </div>
                             </form>
                         </div>

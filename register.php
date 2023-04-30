@@ -1,42 +1,49 @@
 <?php
 require('./includes/connect.php');
-    
-if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['cpassword'])) {
+if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['cpassword']) && !empty($_POST['termes'])) {
     $err = "";
     $valid = "";
     $username = $_POST['username'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
     $cpassword = $_POST['cpassword'];
+
     if ($pass == $cpassword) {
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $password = password_hash($pass, PASSWORD_DEFAULT);
 
-        if(preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ " , $email)){
+        if (preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $email)) {
 
-        var_dump($username);
-        var_dump($password);
-        var_dump($email);
+            var_dump($username);
+            var_dump($password);
+            var_dump($email);
 
-        $q = $conn->prepare("INSERT INTO users (loggin, mail, psw, active) VALUES (:username, :mail, :psw, :active)");
-        $q->bindValue(':username', $username);
-        $q->bindValue(':mail', $email);
-        $q->bindValue(':psw', $password);
-        $q->bindValue('active', true);
-        $result = $q->execute();
+            $q = $conn->prepare("INSERT INTO users (loggin, mail, psw, active) VALUES (:username, :mail, :psw, :active)");
+            $q->bindValue(':username', $username);
+            $q->bindValue(':mail', $email);
+            $q->bindValue(':psw', $password);
+            $q->bindValue('active', true);
+            $result = $q->execute();
 
 
-        if ($result) {
-            $valid = 'inscription réussie';
-            header('location: ./index.php');
+            if ($result) {
+                $valid = 'inscription réussie';
+                header('location: ./index.php');
+            }
+        } else {
+            $err = 'L\'adresse mail n\'est pas valide';
         }
-    }else{
-        $err = 'L\'adresse mail n\'est pas valide';
-    }
-    }else{
+    } else {
         $err = 'Les mots de passes ne correspondent pas!';
     }
 }
-
+//else{
+//     if(!empty($_POST['termes'])){
+//         $err = 'Merci de remplir tous les champs d\'incription';
+//     }else{
+//         $err = 'Merci de lire et accepter les conditions';
+//     }
+// }
+    
 ?>
 
 
@@ -64,66 +71,74 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['c
 </head>
 
 <body>
-    <?php    
-    if(isset($_POST)){
+    <?php
+    if (isset($_POST)) {
         ?>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth">
-                <div class="row flex-grow">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-left p-5">
-                            <div class="brand-logo">
-                                <img src="./assets/images/logo-dark.svg">
-                            </div>
-                            <h4>Tu es nouveau?</h4>
-                            <h6 class="font-weight-light">inscrit toi, c'est gratuit et rapide. En quelques étapes c'est
-                                fait</h6>
-                            <form class="pt-3" method="post" action="./register.php">
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="username" placeholder="Nom d'utilisateur">
+        <div class="container-scroller">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                <div class="content-wrapper d-flex align-items-center auth">
+                    <div class="row flex-grow">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="auth-form-light text-left p-5">
+                                <div class="brand-logo">
+                                    <img src="./assets/images/logo-dark.svg">
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="email" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" name="password" id="exampleInputPassword1" placeholder="Mot de passe">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" name="cpassword" id="exampleInputPassword2" placeholder=" Confirmer le Mot de passe">
-                                </div>
-                                <div class="mb-4">
-                                <p class="text-danger"><?php
-                                        if(isset($err)){
-                                            echo $err;
-                                        }
-                                        ?></p>
-
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input"> J'accepte les termes et les conditions </label>
+                                <h4>Tu es nouveau?</h4>
+                                <h6 class="font-weight-light">inscrit toi, c'est gratuit et rapide. En quelques étapes c'est
+                                    fait</h6>
+                                <form class="pt-3" method="post" action="./register.php">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-lg" id="exampleInputUsername1"
+                                            name="username" placeholder="Nom d'utilisateur">
                                     </div>
-                                </div>
-                                <div class="mt-3">
-                                    <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="./dashboard.php">S'INSCRIRE</a> -->
-                                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="S'inscrire">
-                                </div>
-                                <div class="text-center mt-4 font-weight-light"> Tu as déjà un compte? <a href="index.php" class="text-primary">connecte toi!</a>
-                                </div>
-                            </form>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+                                            name="email" placeholder="Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-lg" name="password"
+                                            id="exampleInputPassword1" placeholder="Mot de passe">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-lg" name="cpassword"
+                                            id="exampleInputPassword2" placeholder=" Confirmer le Mot de passe">
+                                    </div>
+                                    <div class="mb-4">
+                                        <p class="text-danger">
+                                            <?php
+                                            if (isset($err)) {
+                                                echo $err;
+                                            }
+                                            ?>
+                                        </p>
+
+                                        <div class="form-check">
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" name="termes" class="form-check-input"> J'accepte les termes et les
+                                                conditions </label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="./dashboard.php">S'INSCRIRE</a> -->
+                                        <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="S'inscrire">
+                                    </div>
+                                    <div class="text-center mt-4 font-weight-light"> Tu as déjà un compte? <a
+                                            href="index.php" class="text-primary">connecte toi!</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- content-wrapper ends -->
             </div>
-            <!-- content-wrapper ends -->
+            <!-- page-body-wrapper ends -->
+            <?php
+            include_once('./includes/_footer.php');
+            footer();
+            ?>
         </div>
-        <!-- page-body-wrapper ends -->
         <?php
-        include_once('./includes/_footer.php');
-        footer();
-        ?>
-    </div>
-    <?php
     }
     ?>
     <!-- container-scroller -->

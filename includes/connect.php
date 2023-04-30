@@ -1,6 +1,6 @@
 <?php
     //variables de connection
-    $username = 'web';
+    $user = 'web';
     $password = 'adV]GmI3fE[rvOXZ';
     $host = '127.0.0.1';
     $dbname = 'gestion_pla';
@@ -8,7 +8,7 @@
 
     try{
         //Connexion a la base de donnée.
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // echo"Connecté a la base de donnée";
 
