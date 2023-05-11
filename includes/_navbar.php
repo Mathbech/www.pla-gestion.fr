@@ -1,6 +1,6 @@
 <!-- Début de la fonction nav -->
 <?php
-function nav($username)
+function nav($username, $id)
 {
     ?>
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -22,8 +22,8 @@ function nav($username)
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
                         aria-expanded="false">
                         <div class="nav-profile-img">
-                            <!-- <img src="assets/images/faces/face28.png" alt="image"> -->
-                            <i class="bi bi-person-circle"></i>
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo de profil">
+                            <!-- <i class="bi bi-person-circle"></i> -->
                         </div>
                         <!-- Indication du nom d'utilisateur -->
                         <div class="nav-profile-text">
@@ -36,8 +36,8 @@ function nav($username)
                     <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm"
                         aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                         <div class="p-3 text-center bg-primary">
-                            <!-- <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/images/faces/face28.png" alt="Photo profil"> -->
-                            <i class="bi bi-person-circle"></i>
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo profil">
+                            <!-- <i class="bi bi-person-circle"></i> -->
                             <h2>
                                 <?php echo $username; ?>
                             </h2>

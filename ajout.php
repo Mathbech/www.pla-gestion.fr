@@ -64,13 +64,13 @@ if(!empty($_POST['type']) && !empty($_POST['nb_bobine']) && !empty($_POST['poids
         <?php
             // Inclure la navbar avec php
             include_once('./includes/_navbar.php');
-            nav($username);
+            nav($username, $id);
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side($username);
+            side($username, $id);
             ?>
 
             <div class="col-md-6 grid-margin stretch-card">

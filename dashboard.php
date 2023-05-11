@@ -38,13 +38,13 @@
         <!-- inclure la nav bar php -->
         <?php        
         include_once('./includes/_navbar.php');
-        nav($username);
+        nav($username, $id);
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side($username);
+            side($username, $id);
             ?>
             <!-- partial -->
             <div class="main-panel">
@@ -63,10 +63,10 @@
                                         card($id);
                                         ?>
                                     </div>
-                                    <!-- <?php
-                                    //include_once('./includes/courbes.php');
-                                    //courbes($id, $timezone);
-                                    ?> -->
+                                    <?php
+                                    include_once('./includes/courbes.php');
+                                    courbes($id, $timezone);
+                                    ?>
                                 </div>
                             </div>
                         </div>

@@ -20,7 +20,7 @@ if (isset($_POST)) {
 
 if (isset($_POST['email'])) {
     if ($_POST['email'] === $data['mail']) {
-        if (isset($_POST['password']) && $_POST['cpassword']) {
+        if (isset($_POST['password']) && isset($_POST['cpassword'])) {
             $err = "";
             $valid = "";
             // var_dump($_POST);
@@ -29,7 +29,7 @@ if (isset($_POST['email'])) {
             $cpassword = $_POST['cpassword'];
 
             if ($pass == $cpassword) {
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $password = password_hash($pass, PASSWORD_DEFAULT);
                 // var_dump($password);
                 $r = $conn->prepare("UPDATE users SET psw = :pswd WHERE id = :id");
                 // $r->bindValue(':email', $mail);
@@ -48,14 +48,25 @@ if (isset($_POST['email'])) {
             $err = 'Merci de remplir les champs de mot de passe';
         }
     } else {
-        $mail = $_POST['email'];
-        $r1 = $conn->prepare("UPDATE users SET email = :email WHERE id = :id");
-        $r1->bindValue(':email', $mail);
-        $r1->bindValue(':id', $id);
-        $result1 = $r->execute();
+        if (isset($_POST['password']) && isset($_POST['cpassword'])) {
+            $mail1 = $_POST['email'];
+            $pass1 = $_POST['password'];
+            $cpassword1 = $_POST['cpassword'];
+            if ($pass1 == $cpassword1) {
+                $password1 = password_hash($pass1, PASSWORD_DEFAULT);
 
-        if ($result1) {
-            $valid = 'Email modifié avec succès';
+                $r1 = $conn->prepare("UPDATE users SET mail = :email, psw = :pswd WHERE id = :id");
+                $r1->bindValue(':email', $mail1);
+                $r1->bindValue(':pswd', $password1);
+                $r1->bindValue(':id', $id);
+                $result1 = $r1->execute();
+
+                if ($result1) {
+                    $valid = 'Informations modifiés avec succès';
+                }
+            } else {
+                $err = 'Les mots de passes ne correspondent pas!';
+            }
         }
     }
 }
@@ -88,23 +99,19 @@ if (isset($_POST['email'])) {
         <div class="container-scroller">
             <?php
             include_once('includes/_navbar.php');
-            nav($username);
+            nav($username, $id);
             ?>
             <!-- partial -->
             <div class="container-fluid page-body-wrapper">
                 <?php
                 include_once('./includes/_sidebar.php');
-                side($username);
+                side($username, $id);
                 ?>
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Modifier votre profil</h4>
                         <p class="card-description">Modifier votre profil</p>
                         <form class="forms-sample" method="post" action="./settings.php">
-                            <!-- <div class="form-group">
-                            <label for="exampleInputName1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-                        </div> -->
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Modifier votre email</label>
                                 <input type="email" name="email" value="<?php echo ($data['mail']); ?>" class="form-control"
@@ -120,34 +127,24 @@ if (isset($_POST['email'])) {
                                 <input type="password" name="cpassword" class="form-control" id="exampleInputPassword4"
                                     placeholder="Confirmez le mot de passe">
                             </div>
-                            <!-- <div class="form-group">
-                            <label>File upload</label>
-                            <input type="file" name="img[]" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled
-                                    placeholder="Ajouter un photo de profil">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                                </span>
-                            </div>
-                        </div> -->
-                            <input type="submit" class="btn btn-primary mr-2" value="mettre à jour">
-                        </form>
-                        <p>
-                            <?php if (!isset($err))
-                                echo ($err) ?>
-                            </p>
-                            <p>
-                            <?php if (!isset($valid))
-                                echo ($valid) ?>
-                            </p>
+                            <p class="text-danger">
+                                <?php if (isset($err))
+                                    echo ($err) ?>
+                                </p>
+                                <p class="text-success">
+                                <?php if (isset($valid))
+                                    echo ($valid) ?>
+                                </p>
+                                <input type="submit" class="btn btn-primary mr-2" value="mettre à jour">
+                            </form>
+
                         </div>
                     </div>
                 </div>
 
                 <?php
-                            include_once('./includes/_footer.php');
-                            footer();
+                                include_once('./includes/_footer.php');
+                                footer();
     }
     ?>
     </div>

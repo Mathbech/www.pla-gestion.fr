@@ -1,5 +1,5 @@
 <?php
-function side($username)
+function side($username, $id)
 {
 	?>
 	<nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -85,8 +85,8 @@ function side($username)
 						<div>
 							<div class="d-flex align-items-center">
 								<div class="sidebar-profile-img">
-									<!-- <img src="assets/images/faces/face28.png" alt="image"> -->
-									<i class="bi bi-person-circle"></i>
+									<img class="img-avatar  img-avatar48" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo">
+									<!-- <i class="bi bi-person-circle"></i> -->
 								</div>
 								<div class="sidebar-profile-text">
 									<p class="mb-1"><?php echo $username; ?></p>

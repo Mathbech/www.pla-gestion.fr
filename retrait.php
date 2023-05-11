@@ -37,13 +37,13 @@ isloggedin();
     <div class="container-scroller">
         <?php
         include_once('./includes/_navbar.php');
-        nav($username);
+        nav($username, $id);
         ?>
         <div class="container-fluid page-body-wrapper">
             <!-- Inclure sidebar avec php -->
             <?php
             include_once('./includes/_sidebar.php');
-            side($username);
+            side($username, $id);
 
             include_once('./includes/connect.php');
             if (isset($_POST['delete'])) {

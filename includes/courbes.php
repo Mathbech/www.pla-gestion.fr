@@ -5,7 +5,7 @@ function courbes($id, $timezone)
 
     $result = $conn->query("SELECT id, SUM(prix) AS total_price FROM filament WHERE id_users = $id");
     foreach ($result as $row) {
-        var_dump($row);
+        // var_dump($row);
         ?>
         <div class="row">
             <div class="col-12 grid-margin">
@@ -32,7 +32,7 @@ function courbes($id, $timezone)
                                         <span class="text-danger"><i class="mdi mdi-arrow-down"></i>800%</span>
                                     </div>
                                     <h3 class="mb-4 text-dark font-weight-bold">
-                                        <?php echo ($row['total_price']); ?>
+                                        <?php echo round($row['total_price'], 2); ?>€
                                     </h3>
                                     <canvas id="total-expences"></canvas>
                                 </div>
