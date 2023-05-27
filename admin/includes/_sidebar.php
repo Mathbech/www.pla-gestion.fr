@@ -65,10 +65,10 @@ function side($username, $id)
 				<div class="collapse" id="auth">
 				  <ul class="nav flex-column sub-menu">
 					<li class="nav-item"> <a class="nav-link" href="admin/users.php"> Utilisateurs inscrits </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> État de santé du site </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Visites </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Vide </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Vide </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> État de santé du site </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Visites </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Vide </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Vide </a></li>
 				  </ul>
 				</div>
 			  </li>
@@ -80,7 +80,7 @@ function side($username, $id)
 						<div>
 							<div class="d-flex align-items-center">
 								<div class="sidebar-profile-img">
-									<img class="img-avatar  img-avatar48" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo">
+									<img class="img-avatar  img-avatar48" src="./../uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo">
 									<!-- <i class="bi bi-person-circle"></i> -->
 								</div>
 								<div class="sidebar-profile-text">

@@ -5,8 +5,8 @@ function nav($username, $id)
     ?>
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.php"><img src="assets/images/logo-dark.png" alt="logo" /></a>
-            <a class="navbar-brand brand-logo-mini" href="index.php"><img src="assets/images/logo-mini.svg"
+            <a class="navbar-brand brand-logo" href="index.php"><img src="./../assets/images/logo-dark.png" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini" href="index.php"><img src="./../assets/images/logo-mini.svg"
                     alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -22,7 +22,7 @@ function nav($username, $id)
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
                         aria-expanded="false">
                         <div class="nav-profile-img">
-                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo de profil">
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="./../uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo de profil">
                             <!-- <i class="bi bi-person-circle"></i> -->
                         </div>
                         <!-- Indication du nom d'utilisateur -->
@@ -36,7 +36,7 @@ function nav($username, $id)
                     <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm"
                         aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                         <div class="p-3 text-center bg-primary">
-                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo profil">
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="./../uploads/photoprofil/profil<?php echo($id); ?>.png" alt="Photo profil">
                             <!-- <i class="bi bi-person-circle"></i> -->
                             <h2>
                                 <?php echo $username; ?>
@@ -83,38 +83,6 @@ function nav($username, $id)
                 data-toggle="offcanvas">
                 <span class="mdi mdi-menu"></span>
             </button>
-        </div>
-    </nav>
-    <?php
-}
-?>
-<!-- Fin de la fonction nav -->
-
-
-<!-- Début de la fonction nav -->
-<?php
-function navd($username)
-{
-    ?>
-    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.php"><img src="assets/images/logo-dark.png" alt="logo" /></a>
-            <a class="navbar-brand brand-logo-mini" href="index.php"><img src="assets/images/logo-mini.svg"
-                    alt="logo" /></a>
-        </div>
-        <div class="navbar-menu-wrapper d-flex align-items-stretch">
-            <ul class="navbar-nav navbar-nav-right">
-                <li class="nav-item nav-profile dropdown">
-                    <div class="nav-profile-img">
-                        <i class="bi bi-person-circle"></i>
-                    </div>
-                    <div class="nav-profile-text">
-                        <p class="mb-1 text-black">
-                            <?php echo $username; ?>
-                        </p>
-                    </div>
-                </li>
-            </ul>
         </div>
     </nav>
     <?php

@@ -1,12 +1,10 @@
 <?php
-    session_start();
-    $username = $_SESSION['username'];
-    $id = $_SESSION['id'];
+session_start();
+$username = $_SESSION['username'];
+$id = $_SESSION['id'];
 
-    require_once('../includes/log.php');
-    isloggedin();
-
-    $timezone = date_default_timezone_get();
+require_once('../includes/log.php');
+isloggedin();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,7 +34,7 @@
 <body>
     <div class="container-scroller">
         <!-- inclure la nav bar php -->
-        <?php        
+        <?php
         include_once('./includes/_navbar.php');
         nav($username, $id);
         ?>
@@ -52,7 +50,10 @@
                     <div class="d-xl-flex justify-content-between align-items-start">
                         <h2 class="text-dark font-weight-bold mb-2"> Utilisateurs </h2>
                     </div>
-                    
+                <?php
+                require_once('./functions/users.php');
+                users();
+                ?>
                 </div>
             </div>
         </div>
