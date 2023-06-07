@@ -3,7 +3,7 @@ session_start();
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
 
-require_once('./includes/log.php');
+require_once(__DIR__.'/includes/log.php');
 isloggedin();
 
 
@@ -28,6 +28,10 @@ if(!empty($_POST['type']) && !empty($_POST['nb_bobine']) && !empty($_POST['poids
     $q->bindValue('id', $id);
         
     $result = $q->execute();
+
+    if($result){
+        header('Location: stock.php');
+    }
 }
 
 ?>

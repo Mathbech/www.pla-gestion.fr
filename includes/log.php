@@ -1,4 +1,5 @@
 <?php
+	error_reporting(E_ALL);
 function isloggedin(){
 	// Vérification de la session de l'utilisateur
 	if (empty($_SESSION['id'])){

@@ -6,7 +6,7 @@ function side($username, $id)
 		<ul class="nav">
 			<li class="nav-item nav-category">Main</li>
 			<li class="nav-item">
-				<a class="nav-link" href="dashboard.php">
+				<a class="nav-link" href="./../dashboard.php">
 					<span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
 					<span class="menu-title">Dashboard</span>
 				</a>
@@ -42,14 +42,14 @@ function side($username, $id)
 			  </li> -->
 			<!-- Lien vers les ajouter et retrait de tock -->
 			<li class="nav-item">
-				<a class="nav-link" href="./ajout.php">
+				<a class="nav-link" href="./../ajout.php">
 					<span class="icon-bg"><i class="mdi mdi-cart-plus"></i></span>
 					<span class="menu-title">Ajout de stock</span>
 				</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="./retrait.php">
+				<a class="nav-link" href="./../retrait.php">
 					<span class="icon-bg"><i class="mdi mdi-cart-plus"></i></span>
 					<span class="menu-title">Retrait de stock</span>
 				</a>

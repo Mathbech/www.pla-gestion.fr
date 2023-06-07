@@ -41,19 +41,24 @@ function side($username, $id)
 				</a>
 			  </li> -->
 			<!-- Lien vers les ajouter et retrait de tock -->
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<a class="nav-link" href="./ajout.php">
 					<span class="icon-bg"><i class="mdi mdi-cart-plus"></i></span>
 					<span class="menu-title">Ajout de stock</span>
 				</a>
-			</li>
-
+			</li> -->
 			<li class="nav-item">
+				<a class="nav-link" href="./stock.php">
+					<span class="icon-bg"><i class="mdi mdi-cart-plus"></i></span>
+					<span class="menu-title">Gérer les stocks</span>
+				</a>
+			</li>
+			<!-- <li class="nav-item">
 				<a class="nav-link" href="./retrait.php">
 					<span class="icon-bg"><i class="mdi mdi-cart-plus"></i></span>
 					<span class="menu-title">Retrait de stock</span>
 				</a>
-			</li>
+			</li> -->
 			<!-- Fin lien ajout et retrait de stock -->
 			<?php if($id===1){ ?>
 			<li class="nav-item">
@@ -65,10 +70,10 @@ function side($username, $id)
 				<div class="collapse" id="auth">
 				  <ul class="nav flex-column sub-menu">
 					<li class="nav-item"> <a class="nav-link" href="admin/users.php"> Utilisateurs inscrits </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> État de santé du site </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Visites </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Vide </a></li>
-					<li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> Vide </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> État de santé du site </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Visites </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Vide </a></li>
+					<li class="nav-item"> <a class="nav-link" href="#"> Vide </a></li>
 				  </ul>
 				</div>
 			  </li>

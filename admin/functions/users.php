@@ -11,11 +11,11 @@ function users()
                     <th> id compte </th>
                     <th> loggin </th>
                     <th> Date d'enregistrement </th>
+                    <th> Dernière connexion </th>
                     <th> Actif? </th>
                 </tr>
             </thead>
             <?php
-            $i = 1;
             // Affichage des données dans un tableau HTML
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 ?>
@@ -33,12 +33,14 @@ function users()
                             <?php echo ($row['register_date']); ?>
                         </td>
                         <td>
-                            <?php echo ($row['active']); ?>
+                            Undefined
+                        </td>
+                        <td>
+                            <?php if($row['active'] === 1){ echo ("Actif");}else{echo ("Compte désactivé");} ?>
                         </td>
                     </tr>
                 </tbody>
                 <?php
-                $i++;
             }
             ?>
         </table>
