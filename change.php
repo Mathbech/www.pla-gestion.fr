@@ -90,10 +90,16 @@ if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
                         <div class="card-body">
                             <h4 class="card-title">Modification de stock</h4>
                             <form class="forms-sample" method="post" action="./change.php">
-                                <div class="form-group row">
-                                    <label for="nombre_bobine" class="col-sm-3 col-form-label">Couleur</label>
+                            <div class="form-group row">
+                                    <label for="categorie" class="col-sm-3 col-form-label">Catégorie bobine</label>
                                     <div class="col-sm-9">
-                                        <?php echo($data['couleur']); ?>
+                                        <input type="text" name="categorie" id="categorie" value="<?php echo($data['categorie']); ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="couleur" class="col-sm-3 col-form-label">Couleur</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="couleur" id="couleur" value="<?php echo($data['couleur']); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
