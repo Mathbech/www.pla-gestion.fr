@@ -3,7 +3,7 @@ function users()
 {
     include('./../includes/connect.php');
     try {
-        $result = $conn->query("SELECT id, loggin, register_date, active FROM users");
+        $result = $conn->query("SELECT id, loggin, last_conn, register_date, active FROM users");
         ?>
         <table class="table table-bordered">
             <thead>
@@ -33,10 +33,10 @@ function users()
                             <?php echo ($row['register_date']); ?>
                         </td>
                         <td>
-                            Undefined
+                            <?php echo ($row['last_conn']); ?>
                         </td>
                         <td>
-                            <?php if($row['active'] === 1){ echo ("Actif");}else{echo ("Compte désactivé");} ?>
+                            <?php if($row['active'] === 1){ echo ("Compte actif");}else{echo ("Compte désactivé");} ?>
                         </td>
                     </tr>
                 </tbody>

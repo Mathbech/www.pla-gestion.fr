@@ -44,10 +44,9 @@ if (isset($_POST['email'])) {
 
                         if ($result) {
                             $valid = 'Mot de passe modifié avec succès';
-                        }else{
+                        } else {
                             $err = 'Une erreur est survenue';
                         }
-
                     } else {
                         $err = 'Les mots de passes ne correspondent pas!';
                     }
@@ -55,41 +54,21 @@ if (isset($_POST['email'])) {
                     $err = 'Merci de remplir les champs de mot de passe';
                 }
             } else {
-                // if (isset($_POST['password']) && isset($_POST['cpassword'])) {
-                //     $mail1 = $_POST['email'];
-                //     $pass1 = $_POST['password'];
-                //     $cpassword1 = $_POST['cpassword'];
-                //     if ($pass1 == $cpassword1) {
-                //         $password1 = password_hash($pass1, PASSWORD_DEFAULT);
 
-                //         $r1 = $conn->prepare("UPDATE users SET mail = :email, psw = :pswd WHERE id = :id");
-                //         $r1->bindValue(':email', $mail1);
-                //         $r1->bindValue(':pswd', $password1);
-                //         $r1->bindValue(':id', $id);
-                //         $result1 = $r1->execute();
+                $mail2 = $_POST['email'];
+                $r2 = $conn->prepare("UPDATE users SET mail = :email WHERE id = :id");
+                $r2->bindValue(':email', $mail2);
+                $r2->bindValue(':id', $id);
+                $result2 = $r2->execute();
 
-                //         if ($result1) {
-                //             $valid = 'Informations modifiés avec succès';
-                //         }
-                //     } else {
-                //         $err = 'Les mots de passes ne correspondent pas!';
-                //     }
-                // }else{
-                    $mail2 = $_POST['email'];
-                    $r2 = $conn->prepare("UPDATE users SET mail = :email WHERE id = :id");
-                    $r2->bindValue(':email', $mail2);
-                    $r2->bindValue(':id', $id);
-                    $result2 = $r2->execute();
-
-                    if ($result2) {
-                        $valid = 'Email modifié avec succès';
-                    }
-                // }
+                if ($result2) {
+                    $valid = 'Email modifié avec succès';
+                }
             }
         } else {
             $err = 'L\'ancien mot de passe saisie n\'est pas correct';
         }
-    }else{
+    } else {
         $err = 'Merci de saisir votre ancien mot de passe';
     }
 }
@@ -131,6 +110,7 @@ if (isset($_POST['email'])) {
                 include_once('./includes/_sidebar.php');
                 side($username, $id);
                 ?>
+
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Modifier votre profil</h4>
@@ -138,58 +118,54 @@ if (isset($_POST['email'])) {
                         <form class="forms-sample" method="post" action="./settings.php">
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Modifier votre email</label>
-                                <input type="email" name="email" value="<?php echo ($data['mail']); ?>" class="form-control"
-                                    id="exampleInputEmail3" placeholder="Modifier votre Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Modifier le mot de passe</label>
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword4"
-                                    placeholder="Modifier le mot de passe">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Confirmez le mot de passe</label>
-                                <input type="password" name="cpassword" class="form-control" id="exampleInputPassword4"
-                                    placeholder="Confirmez le mot de passe">
+                                <input type="email" name="email" value="<?php echo ($data['mail']); ?>" class="form-control" id="exampleInputEmail3" placeholder="Modifier votre Email">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Entrez votre mot de passe</label>
-                                <input type="password" name="apassword" class="form-control" id="exampleInputPassword4"
-                                    placeholder="Entrez votre mot de passe">
+                                <input type="password" name="apassword" class="form-control" id="exampleInputPassword4" placeholder="Entrez votre mot de passe">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Modifier le mot de passe</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword4" placeholder="Modifier le mot de passe">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Confirmez le mot de passe</label>
+                                <input type="password" name="cpassword" class="form-control" id="exampleInputPassword4" placeholder="Confirmez le mot de passe">
                             </div>
                             <p class="text-danger">
                                 <?php if (isset($err))
                                     echo ($err) ?>
-                                </p>
-                                <p class="text-success">
+                            </p>
+                            <p class="text-success">
                                 <?php if (isset($valid))
                                     echo ($valid) ?>
-                                </p>
-                                <input type="submit" class="btn btn-primary mr-2" value="mettre à jour">
-                            </form>
+                            </p>
+                            <input type="submit" class="btn btn-primary mr-2" value="mettre à jour">
+                        </form>
 
-                        </div>
                     </div>
                 </div>
+            </div>
 
-                <?php
-                                include_once('./includes/_footer.php');
-                                footer();
+        <?php
+        include_once('./includes/_footer.php');
+        footer();
     }
-    ?>
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="./assets/js/off-canvas.js"></script>
-    <script src="./assets/js/hoverable-collapse.js"></script>
-    <script src="./assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <!-- End custom js for this page -->
+        ?>
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="./assets/js/off-canvas.js"></script>
+        <script src="./assets/js/hoverable-collapse.js"></script>
+        <script src="./assets/js/misc.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <!-- End custom js for this page -->
 </body>
 
 </html>

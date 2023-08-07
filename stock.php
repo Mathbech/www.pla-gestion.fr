@@ -55,7 +55,7 @@ isloggedin();
                     <div class="col-lg-10 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Retrait de stock</h4>
+                                <h4 class="card-title">Modification du stock</h4>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -80,7 +80,7 @@ isloggedin();
                                                 <td><?php echo ($filament['prix'] . ' €'); ?></td>
                                                 <td><?php echo ($filament['date_ajout']); ?></td>
                                                 <td>
-                                                    <a class="btn btn-secondary" href="#">Modifier Cet ajout</a>
+                                                    <a class="btn btn-secondary" href="./change.php?id=<?= $filament['id']; ?>">Modifier Cet ajout</a>
                                                     <a class="btn btn-secondary" href="./retrait.php?id=<?= $filament['id']; ?>">Supprimer cet ajout</a>
                                                 </td>
                                             </tr>

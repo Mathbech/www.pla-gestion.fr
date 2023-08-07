@@ -94,7 +94,7 @@ function side($username, $id)
 			</li>
 			<li class="nav-item sidebar-user-actions">
 				<div class="sidebar-user-menu">
-					<a href="./settings.php" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
+					<a href="./../settings.php" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
 						<span class="menu-title">Paramètres</span>
 					</a>
 				</div>
