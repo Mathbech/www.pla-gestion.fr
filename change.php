@@ -6,7 +6,7 @@ $id = $_SESSION['id'];
 require_once(__DIR__ . '/includes/log.php');
 isloggedin();
 require('./includes/connect.php');
-
+// var_dump($_GET);
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     if (isset($_POST)) {
         $r = $conn->prepare("SELECT categorie, couleur, nombre, poid FROM `filament` WHERE `id` = :ident");
@@ -14,27 +14,30 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         $r->bindValue(':ident', $_GET['id']);
         //exécution de la requête
         $r->execute();
-        $data = $r->fetchAll(PDO::FETCH_ASSOC);
+        $data = $r->fetch(PDO::FETCH_ASSOC);
     }
     $idfil = $_GET['id'];
+}else{
+    header('Location: stock.php');
 }
 
 
 if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
     // Mise ne variable des données reçut en POST
-    $idf = $idfil;
+    $idf = $_POST['id'];
     $nb_bobine = $_POST['nb_bobine'];
     $poids = $_POST['poids'];
     //Fin de la mise en varriable
 
 
     //Insérer une ligne dans la table de données
-    $q = $conn->prepare("UPDATE filament SET nombre = ':nb_bobine', poid = ':poids') WHERE id = :id");
-    $q->bindValue('nb_bobine', $nb_bobine);
-    $q->bindValue('poids', $poids);
-    $q->bindValue('id', $idf);
+    $q = $conn->prepare("UPDATE filament SET nombre = ':nb_bobine', poid = ':poid' WHERE id = :id");
+    $q->bindValue(':nb_bobine', $nb_bobine);
+    $q->bindValue(':poid', $poids);
+    $q->bindValue(':id', $idf);
 
     $result = $q->execute();
+    var_dump($_POST);
 
     if ($result) {
         header('Location: stock.php');
@@ -75,8 +78,8 @@ if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
             <?php
             var_dump($data);
             // Inclure la navbar avec php
-            // include_once('./includes/_navbar.php');
-            // nav($username, $id);
+            include_once('./includes/_navbar.php');
+            nav($username, $id);
             ?>
             <div class="container-fluid page-body-wrapper">
                 <!-- Inclure sidebar avec php -->
@@ -112,6 +115,7 @@ if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
                                     <label for="poids" class="col-sm-3 col-form-label">Poids des bobines</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="poids" class="poids" id="poids" value="<?php echo($data['poid']); ?>" placeholder="Poids">
+                                        <input type="hidden" name="id" value="<?php echo($_GET['id']); ?>">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Modifier</button>
