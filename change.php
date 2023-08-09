@@ -9,15 +9,16 @@ require('./includes/connect.php');
 // var_dump($_GET);
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     if (isset($_POST)) {
-        $r = $conn->prepare("SELECT categorie, couleur, nombre, poid FROM `filament` WHERE `id` = :ident");
+        $r = $conn->prepare("SELECT categorie, couleur, nombre, poid FROM `filament` WHERE `id` = :ident AND id_users = :id");
         //Préparation des valeurs
+        $r->bindValue(':id', $id);
         $r->bindValue(':ident', $_GET['id']);
         //exécution de la requête
         $r->execute();
         $data = $r->fetch(PDO::FETCH_ASSOC);
     }
     $idfil = $_GET['id'];
-}else{
+} else {
     header('Location: stock.php');
 }
 
@@ -27,20 +28,17 @@ if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
     $idf = $_POST['id'];
     $nb_bobine = $_POST['nb_bobine'];
     $poids = $_POST['poids'];
-    //Fin de la mise en varriable
 
-
-    //Insérer une ligne dans la table de données
-    $q = $conn->prepare("UPDATE filament SET nombre = ':nb_bobine', poid = ':poid' WHERE id = :id");
+    $q = $conn->prepare("UPDATE filament SET nombre = :nb_bobine, poid = :poids WHERE id = :id");
     $q->bindValue(':nb_bobine', $nb_bobine);
-    $q->bindValue(':poid', $poids);
+    $q->bindValue(':poids', $poids);
     $q->bindValue(':id', $idf);
 
     $result = $q->execute();
-    var_dump($_POST);
 
     if ($result) {
         header('Location: stock.php');
+        exit; // Important: End the script after redirection
     }
 }
 
@@ -93,29 +91,29 @@ if (!empty($_POST['nb_bobine']) && !empty($_POST['poids'])) {
                         <div class="card-body">
                             <h4 class="card-title">Modification de stock</h4>
                             <form class="forms-sample" method="post" action="./change.php">
-                            <div class="form-group row">
+                                <div class="form-group row">
                                     <label for="categorie" class="col-sm-3 col-form-label">Catégorie bobine</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="categorie" id="categorie" value="<?php echo($data['categorie']); ?>">
+                                        <input type="text" name="categorie" id="categorie" value="<?php echo ($data['categorie']); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="couleur" class="col-sm-3 col-form-label">Couleur</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="couleur" id="couleur" value="<?php echo($data['couleur']); ?>">
+                                        <input type="text" name="couleur" id="couleur" value="<?php echo ($data['couleur']); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="nombre_bobine" class="col-sm-3 col-form-label">Nombre de bobine</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="nb_bobine" class="qte" id="nombre_bobine" value="<?php echo($data['nombre']); ?>" placeholder="Nombre de bobine">
+                                        <input type="text" name="nb_bobine" class="qte" id="nombre_bobine" value="<?php echo ($data['nombre']); ?>" placeholder="Nombre de bobine">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="poids" class="col-sm-3 col-form-label">Poids des bobines</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="poids" class="poids" id="poids" value="<?php echo($data['poid']); ?>" placeholder="Poids">
-                                        <input type="hidden" name="id" value="<?php echo($_GET['id']); ?>">
+                                        <input type="text" name="poids" class="poids" id="poids" value="<?php echo ($data['poid']); ?>" placeholder="Poids">
+                                        <input type="hidden" name="id" value="<?php echo ($_GET['id']); ?>">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Modifier</button>

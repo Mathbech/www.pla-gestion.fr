@@ -68,9 +68,27 @@ isloggedin();
                                             <th> Select </th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         <?php
                                         foreach ($filaments as $filament) {
+                                            // Convertir la chaîne de date au format UNIX timestamp en objet de date
+                                            $date = DateTime::createFromFormat("Y-m-d H:i:s", $filament['date_ajout']);
+
+                                            if ($date) {
+                                                // Obtenir le fuseau horaire par défaut du serveur
+                                                $serverTimeZone = new DateTimeZone(date_default_timezone_get());
+
+                                                // Obtenir le fuseau horaire de l'utilisateur (peut provenir d'une session, d'une préférence, etc.)
+                                                $userTimeZone = new DateTimeZone('Europe/Paris'); // Exemple : fuseau horaire de Paris
+
+                                                // Convertir la date au fuseau horaire de l'utilisateur
+                                                $date->setTimeZone($userTimeZone);
+
+                                                $formattedDate = $date->format("d/m/Y H:i");
+                                            } else {
+                                                $formattedDate = "Date invalide";
+                                            }
                                         ?>
                                             <tr>
                                                 <td><?php echo ($filament['categorie']); ?></td>
@@ -78,7 +96,7 @@ isloggedin();
                                                 <td><?php echo ($filament['couleur']); ?></td>
                                                 <td><?php echo ($filament['poid']); ?> Kg</td>
                                                 <td><?php echo ($filament['prix'] . ' €'); ?></td>
-                                                <td><?php echo ($filament['date_ajout']); ?></td>
+                                                <td><?php echo $formattedDate; ?></td>
                                                 <td>
                                                     <a class="btn btn-secondary" href="./change.php?id=<?= $filament['id']; ?>">Modifier Cet ajout</a>
                                                     <a class="btn btn-secondary" href="./retrait.php?id=<?= $filament['id']; ?>">Supprimer cet ajout</a>
